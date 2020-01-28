@@ -16,8 +16,8 @@ public class VoidSpawn implements Listener {
             if(p.getLastDamageCause() != null){
                 if(e.getCause().equals(EntityDamageEvent.DamageCause.VOID)){
                     if(p.getLocation().getWorld().getName().equalsIgnoreCase("Vide")){
-                        e.setCancelled(true);
                         Bukkit.dispatchCommand(p, "spawn");
+                        e.setCancelled(true);
                     }
                 }
 

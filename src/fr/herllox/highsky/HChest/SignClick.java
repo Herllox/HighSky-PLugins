@@ -2,7 +2,6 @@ package fr.herllox.highsky.HChest;
 
 import fr.herllox.highsky.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -16,13 +15,150 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.Directional;
+
+
 
 import java.util.Arrays;
 import java.util.List;
 
 
 public class SignClick implements Listener {
+
+    List<Material> blacklisted = Arrays.asList(
+            Material.DIAMOND_SHOVEL,
+            Material.DIAMOND_HOE,
+            Material.DIAMOND_PICKAXE,
+            Material.DIAMOND_AXE,
+            Material.DIAMOND_SWORD,
+            Material.DIAMOND_BOOTS,
+            Material.DIAMOND_CHESTPLATE,
+            Material.DIAMOND_LEGGINGS,
+            Material.DIAMOND_HELMET,
+            Material.BOW,
+            Material.GOLDEN_AXE,
+            Material.GOLDEN_HOE,
+            Material.GOLDEN_PICKAXE,
+            Material.GOLDEN_SHOVEL,
+            Material.GOLDEN_SWORD,
+            Material.GOLDEN_BOOTS,
+            Material.GOLDEN_CHESTPLATE,
+            Material.GOLDEN_LEGGINGS,
+            Material.GOLDEN_HELMET,
+            Material.IRON_AXE,
+            Material.IRON_HOE,
+            Material.IRON_PICKAXE,
+            Material.IRON_AXE,
+            Material.IRON_PICKAXE,
+            Material.IRON_SHOVEL,
+            Material.IRON_SWORD,
+            Material.IRON_BOOTS,
+            Material.IRON_CHESTPLATE,
+            Material.IRON_LEGGINGS,
+            Material.IRON_HELMET,
+            Material.WOODEN_AXE,
+            Material.WOODEN_HOE,
+            Material.WOODEN_PICKAXE,
+            Material.WOODEN_SHOVEL,
+            Material.WOODEN_SWORD,
+            Material.LEATHER_BOOTS,
+            Material.LEATHER_CHESTPLATE,
+            Material.LEATHER_LEGGINGS,
+            Material.LEATHER_HELMET,
+            Material.CHAINMAIL_BOOTS,
+            Material.CHAINMAIL_CHESTPLATE,
+            Material.CHAINMAIL_LEGGINGS,
+            Material.CHAINMAIL_HELMET,
+            Material.GOLDEN_HORSE_ARMOR,
+            Material.DIAMOND_HORSE_ARMOR,
+            Material.IRON_HORSE_ARMOR,
+            Material.LEATHER_HORSE_ARMOR,
+            Material.TURTLE_HELMET,
+            Material.SHIELD,
+            Material.TRIDENT,
+            Material.CROSSBOW,
+            Material.TOTEM_OF_UNDYING,
+            Material.SHULKER_BOX,
+            Material.LIME_SHULKER_BOX,
+            Material.BLACK_SHULKER_BOX,
+            Material.BLUE_SHULKER_BOX,
+            Material.BROWN_SHULKER_BOX,
+            Material.CYAN_SHULKER_BOX,
+            Material.GRAY_SHULKER_BOX,
+            Material.LIGHT_BLUE_SHULKER_BOX,
+            Material.GREEN_SHULKER_BOX,
+            Material.LIGHT_GRAY_SHULKER_BOX,
+            Material.MAGENTA_SHULKER_BOX,
+            Material.ORANGE_SHULKER_BOX,
+            Material.PINK_SHULKER_BOX,
+            Material.PURPLE_SHULKER_BOX,
+            Material.RED_SHULKER_BOX,
+            Material.WHITE_SHULKER_BOX,
+            Material.YELLOW_SHULKER_BOX,
+            Material.BLACK_BED,
+            Material.BLUE_BED,
+            Material.BROWN_BED,
+            Material.CYAN_BED,
+            Material.GRAY_BED,
+            Material.GREEN_BED,
+            Material.LIGHT_BLUE_BED,
+            Material.LIGHT_GRAY_BED,
+            Material.LIME_BED,
+            Material.MAGENTA_BED,
+            Material.ORANGE_BED,
+            Material.PINK_BED,
+            Material.PURPLE_BED,
+            Material.RED_BED,
+            Material.WHITE_BED,
+            Material.YELLOW_BED,
+            Material.AIR,
+            Material.ENCHANTED_BOOK,
+            Material.WRITABLE_BOOK,
+            Material.POTION,
+            Material.LINGERING_POTION,
+            Material.SPLASH_POTION,
+            Material.DRAGON_BREATH,
+            Material.EXPERIENCE_BOTTLE,
+            Material.LAVA_BUCKET,
+            Material.WATER_BUCKET,
+            Material.MILK_BUCKET,
+            Material.COD_BUCKET,
+            Material.PUFFERFISH_BUCKET,
+            Material.TROPICAL_FISH_BUCKET,
+            Material.SALMON_BUCKET,
+            Material.MUSIC_DISC_11,
+            Material.MUSIC_DISC_13,
+            Material.MUSIC_DISC_BLOCKS,
+            Material.MUSIC_DISC_CAT,
+            Material.MUSIC_DISC_CHIRP,
+            Material.MUSIC_DISC_FAR,
+            Material.MUSIC_DISC_MALL,
+            Material.MUSIC_DISC_MELLOHI,
+            Material.MUSIC_DISC_STAL,
+            Material.MUSIC_DISC_STRAD,
+            Material.MUSIC_DISC_WAIT,
+            Material.MUSIC_DISC_WARD,
+            Material.GLOBE_BANNER_PATTERN,
+            Material.CREEPER_BANNER_PATTERN,
+            Material.FLOWER_BANNER_PATTERN,
+            Material.MOJANG_BANNER_PATTERN,
+            Material.SKULL_BANNER_PATTERN,
+            Material.ACACIA_BOAT,
+            Material.BIRCH_BOAT,
+            Material.DARK_OAK_BOAT,
+            Material.JUNGLE_BOAT,
+            Material.OAK_BOAT,
+            Material.SPRUCE_BOAT,
+            Material.ELYTRA,
+            Material.MINECART,
+            Material.CHEST_MINECART,
+            Material.HOPPER_MINECART,
+            Material.TNT_MINECART,
+            Material.SADDLE,
+            Material.FISHING_ROD,
+            Material.CARROT_ON_A_STICK,
+            Material.SHEARS,
+            Material.FLINT_AND_STEEL
+    );
 
     private String Object;
     private String Amount;
@@ -67,6 +203,8 @@ public class SignClick implements Listener {
         Action a = e.getAction();
 
 
+
+
         if (e.getClickedBlock() != null && a == Action.RIGHT_CLICK_BLOCK) {
             if (e.getClickedBlock().getType() == Material.OAK_WALL_SIGN) {
                 Material pb = p.getInventory().getItemInMainHand().getType();
@@ -80,15 +218,18 @@ public class SignClick implements Listener {
                     }
                 }
 
+
+
+
                 String line0 = sign.getLine(0);
                 if (line0.contains(p.getName())) {
                     if (sign.getLine(1).isEmpty()) {
                         if(!(pb == null)) {
-                            if(pb != Material.AIR && pb!= Material.ENCHANTED_BOOK){
+                            if(!blacklisted.contains(pb)){
                                 sign.setLine(1, pb.toString());
                                 sign.update();
                             }else {
-                                p.sendMessage("§6§lHigh§b§lSky §7§l>> §cTu ne peux pas vendre de l'Air.");
+                                p.sendMessage("§6§lHigh§b§lSky §7§l>> §cTu ne peux pas vendre cet Item.");
                             }
 
                         }else{
