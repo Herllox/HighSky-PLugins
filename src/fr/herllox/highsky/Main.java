@@ -21,6 +21,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        System.out.println("HEY BRO");
         saveDefaultConfig();
 
         if (!setupEconomy() ) {
