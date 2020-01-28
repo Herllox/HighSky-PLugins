@@ -8,7 +8,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
-import org.bukkit.craftbukkit.v1_14_R1.block.CraftBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -85,7 +84,7 @@ public class SignClick implements Listener {
                 if (line0.contains(p.getName())) {
                     if (sign.getLine(1).isEmpty()) {
                         if(!(pb == null)) {
-                            if(pb != Material.AIR){
+                            if(pb != Material.AIR && pb!= Material.ENCHANTED_BOOK){
                                 sign.setLine(1, pb.toString());
                                 sign.update();
                             }else {

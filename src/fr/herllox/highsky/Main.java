@@ -40,8 +40,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MOTD(this), this);
         Bukkit.getPluginManager().registerEvents(new Generator(), this);
         Bukkit.getPluginManager().registerEvents(new SignClick(), this);
-        Bukkit.getPluginManager().registerEvents(new JoinBuilder(this), this);
-
+        Bukkit.getPluginManager().registerEvents(new VoidSpawn(), this);
         //Bukkit.getPluginManager().registerEvents(new JoinBuilder(this), this);
 
 
