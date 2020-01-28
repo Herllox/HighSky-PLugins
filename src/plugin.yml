@@ -1,0 +1,17 @@
+name: HighSky
+author: Herllox
+version: 1.5
+main: fr.herllox.highsky.Main
+depend: [PlaceholderAPI]
+api-version: 1.13
+commands:
+  bitch:
+    permission: try.try
+  highsky:
+    description: Commande principale
+  generator:
+    permission: generator.see
+  tags:
+    permission: prefix.set
+  builder:
+    permission: builder.use
